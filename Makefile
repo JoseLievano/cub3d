@@ -3,20 +3,23 @@ RM			=	rm -f
 CFLAGS		=	-Wall -Wextra -Werror
 NAME		=	cube3d
 OBJS		=	$(SRC:.c=.o)
-MINILIBX	=	libs/minilibx/libmlx_linux.a
+MINILIBX	=	libs/minilibx/libmlx_Linux.a
 LIBFT		=	libs/libft/libft.a
 T_DLL		=	libs/t_dll/t_dll.a
-PARSE		=	libs/parse/parse.a
-GRAPHICS	=	libs/graphics/graphics.a
-$GAME		=	libs/game/game.a
-INPUT		=	libs/input/input.a
-RAYCAST		=	libs/raycast/raycast.a
-UTILS		=	libs/utils/utils.a
+PARSE		=	libs/parse/ft_parse.a
+GRAPHICS	=	libs/graphics/ft_graphics.a
+GAME		=	libs/game/ft_game.a
+INPUT		=	libs/input/ft_input.a
+RAYCAST		=	libs/raycast/ft_raycast.a
+UTILS		=	libs/utils/ft_utils.a
 SRC_DIR		=	src/
 SRC_FILES	=	cub3d.c
+SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 
-$(NAME)		=	$(OBJS) $(GAME) $(GRAPHICS) $(RAYCAST) $(INPUT) $(PARSE) $(UTILS) $(T_DLL) $(LIBFT) $(MINILIBX)
-				$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(GAME) $(GRAPHICS) $(RAYCAST) $(INPUT) $(PARSE) $(UTILS) $(T_DLL) $(LIBFT) $(MINILIBX) -lXext -lX11 -lm
+all			:	$(NAME)
+
+$(NAME)		:	download $(OBJS) $(GAME) $(GRAPHICS) $(RAYCAST) $(INPUT) $(PARSE) $(UTILS) $(T_DLL) $(LIBFT) $(MINILIBX)
+				@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(GAME) $(GRAPHICS) $(RAYCAST) $(INPUT) $(PARSE) $(UTILS) $(T_DLL) $(LIBFT) $(MINILIBX) -lXext -lX11 -lm
 
 $(MINILIBX)	:
 				$(MAKE) -C libs/minilibx/
@@ -36,8 +39,6 @@ $(RAYCAST)	:
 				$(MAKE) -C libs/raycast
 $(UTILS)	:
 				$(MAKE) -C libs/utils
-
-all			:	$(NAME)
 
 download	:
 				@clear

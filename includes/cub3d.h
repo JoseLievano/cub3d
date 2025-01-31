@@ -11,6 +11,7 @@
 # include "../libs/raycast/ft_raycast.h"
 # include "../libs/utils/ft_utils.h"
 # include <X11/X.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>

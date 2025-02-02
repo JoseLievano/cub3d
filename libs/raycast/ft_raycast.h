@@ -2,6 +2,7 @@
 # define FT_RAYCAST_H
 # include "../../includes/cub3d.h"
 
+
 // Represents a single ray
 typedef struct s_ray {
 	double  dir_x;       // Ray direction (X)

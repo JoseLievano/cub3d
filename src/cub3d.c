@@ -2,11 +2,7 @@
 
 int main(int argc, char **argv)
 {
-	ft_game();
-	ft_parse();
-	if (argc == 2)
-		printf("%s\n", argv[1]);
-	else
-		printf("Error\nInvalid number of arguments\n");
+	if (argv[1][0] == '1')
+		ft_parse_test(argc, argv);
 	return (0);
 }

@@ -48,7 +48,6 @@ download	:
 
 clean		:
 				$(RM) $(OBJS)
-				@make -C libs/minilibx clean
 				@make -C libs/t_dll clean
 				@make -C libs/libft clean
 				@make -C libs/parse clean

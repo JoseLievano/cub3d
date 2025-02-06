@@ -6,7 +6,7 @@
 /*   By: vflores- <vflores-@student.42luxembou      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 17:45:03 by vflores-          #+#    #+#             */
-/*   Updated: 2025/02/06 17:37:33 by vflores-         ###   ########.fr       */
+/*   Updated: 2025/02/06 18:56:08 by vflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,15 @@ int	validate_map(t_data *game_data, char **map_content)
 {
 	if (!game_data->map)
 		return (error_msg(game_data->mapinfo.path, ERR_MAP_MISSING, FAILURE));
-	if (map
+	if (check_sides(&game_data->mapinfo, map_content) == FAILURE)
+		return (error_msg(game_data->mapinfo.path, ERR_MAP_NO_WALLS, FAILURE));
+	if (game_data->mapinfo.height < 3)
+		return (error_msg(game_data->mapinfo.path, ERR_MAP_TOO_SMALL, FAILURE));
+	if (validate_map(game_data, map_content) == FAILURE)
+		return (FAILURE);
+	if (check_player_pos(game_data, map_content) == FAILURE)
+		return (FAILURE);
+	if (map_ends_correct(&game_data->mapinfo) == FAILURE)
+		return (error_msg(game_data->mapinfo.path, ERR_MAP_LAST, FAILURE));
+	return (SUCCESS);
 }

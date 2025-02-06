@@ -6,7 +6,7 @@
 /*   By: vflores- <vflores-@student.42luxembou      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:42:06 by vflores-          #+#    #+#             */
-/*   Updated: 2025/02/06 17:34:38 by vflores-         ###   ########.fr       */
+/*   Updated: 2025/02/06 18:59:17 by vflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@
 # define ERR_NUM_PLAYER "Map has more than one player"
 # define ERR_PLAYER_DIR "Map has no player position (expected N, S, E or W)
 # define ERR_PLAYER_POS "Invalid player position"
+# define ERR_MAP_MISSING "Missing map"
+# define ERR_MAP_NO_WALLS "Map is not surronded by walls"
+# define ERR_MAP_TOO_SMALL "Map is not at least 3 lines high"
+# define ERR_MAP_LAST "Map is not the last element in file"
 
 enum e_output
 {
@@ -61,6 +65,9 @@ typedef struct s_map
 	int			rows;        // Map row count
 	int			cols;        // Map column count
 	int		index_end_of_map; //indica el final del mapa
+	
+	int	height;
+	int	width;
 	//Validacion del archivo
 	int	is_valid; //Flag que indica si el archivo esta
 			  //correctamente configurado
@@ -96,6 +103,10 @@ int	check_file(const char *args, bool cub);
 size_t	get_max_line_len(t_map *map, int i);
 int	is_whitespace(char c);
 //map_parser.c
+int	validate_map(t_data *game_data, char **map_content);
+
+//map_borders.c
+int	check_sides(t_map *map, char **map_lines);
 
 void	ft_parse(void);
 void	ft_parse_test(int argc, char **argv);

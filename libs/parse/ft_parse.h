@@ -6,7 +6,7 @@
 /*   By: vflores- <vflores-@student.42luxembou      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:42:06 by vflores-          #+#    #+#             */
-/*   Updated: 2025/02/06 18:59:17 by vflores-         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:26:53 by vflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define ERR_MAP_NO_WALLS "Map is not surronded by walls"
 # define ERR_MAP_TOO_SMALL "Map is not at least 3 lines high"
 # define ERR_MAP_LAST "Map is not the last element in file"
+# define ERR_TEXT_RGB_VAL "Invalid RGB value (min: 0, max: 255)"
 
 enum e_output
 {
@@ -49,6 +50,8 @@ typedef struct s_textures
 	char	*ea_path;   // East texture path
 	int		floor_rgb;  // Packed RGB (0xRRGGBB)
 	int		ceil_rgb;   // Packed RGB (0xRRGGBB)
+	unsigned long	hex_floor;
+	unsigned long	hex_ceiling;
 } t_textures;
 
 // For storing map data and player spawn

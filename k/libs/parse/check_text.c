@@ -6,13 +6,13 @@
 /*   By: vflores- <vflores-@student.42luxembou      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 15:44:07 by vflores-          #+#    #+#             */
-/*   Updated: 2025/02/07 16:29:54 by vflores-         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:51:54 by vflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_parse.h"
 
-/* La funcion valida un conjunto de valores RGB asegurandose
+/* La funcon valida un conjunto de valores RGB asegurandose
  * de que cada componente(rojo, verde, azul) este dentro del 
  * rango permitido de 0 a 255. Si algun valor esta fuera de este
  * rango, se genera un mensaje de error y se devuelve un indicador

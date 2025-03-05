@@ -6,19 +6,16 @@
 /*   By: vflores- <vflores-@student.42luxembou      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:42:06 by vflores-          #+#    #+#             */
-/*   Updated: 2025/02/26 11:14:48 by vflores-         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:03:46 by vflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PARSE_H
 # define FT_PARSE_H
+#include "/home/vflores-/CommonCore/cub3D/cub3d/k/libs/game/ft_game.h"
 # include "../../includes/cub3d.h"
 
-
 /*   MACROS   */
-
-# define WIN_HEIGHT 480
-# define WIN_WIDTH 640
 
 # ifndef O_DIRECTORY
 #  define O_DIRECTORY 00200000
@@ -33,7 +30,7 @@
 # define ERR_FILE_NOT_XPM "Not a .xpm file"
 # define ERR_INV_CHAR "Invalid character in map"
 # define ERR_NUM_PLAYER "Map has more than one player"
-# define ERR_PLAYER_DIR "Map has no player position (expected N, S, E or W)
+# define ERR_PLAYER_DIR "Map has no player position (expected N, S, E or W)"
 # define ERR_PLAYER_POS "Invalid player position"
 # define ERR_MAP_MISSING "Missing map"
 # define ERR_MAP_NO_WALLS "Map is not surronded by walls"
@@ -51,12 +48,18 @@
 
 enum e_output
 {
-	FAILURE = 1;
-	SUCCESS = 0;
-	ERR = 2;
-	BREAK = 3;
-	CONTINUE = 4;
-}
+	FAILURE = 1,
+	SUCCESS = 0,
+	ERR = 2,
+	BREAK = 3,
+	CONTINUE = 4
+};
+
+/*typedef struct	s_parse
+{
+	t_player player;
+}	t_parse;
+*/
 
 typedef struct	s_image
 {
@@ -66,6 +69,16 @@ typedef struct	s_image
 	int	size_line;
 	int	endian;
 }	t_image;
+
+/*typedef struct s_player
+{
+        double  pos_x;
+        double  pos_y;
+        double  dir_x;
+        double  dir_y;
+        double  plane_x;
+        double  plane_y;
+}       t_player;*/
 
 // For storing parsed textures and colors
 typedef struct s_textures
@@ -111,34 +124,24 @@ typedef struct s_map
 	t_textures	textures;  // Texture paths and colors
 } t_map;
 
-typedef struct s_player
-{
-	double	pos_x; //Posocion actual del jugador en el mapa
-	double	pos_y; //Posicion actual del jugador en el mapa
-	char 	dir;
-	double	spawn_x; //Player starting X position
-	double	spawn_y; //Player starting Y position
-	char	spawn_dir; //Initial direction (N/S/E/W)
-}	t_player;
-
 typedef struct s_data
 {
 	void	*mlx;
 	void	*win;
 	int	win_height;
 	int	win_width;
-	t_player	player;
+	//t_player	player;
 	t_map	mapinfo;
 	char	**map;
 	int	**textures;
 	int	**textures_pixels;
 	t_textures	texinfo;
-}
+}	t_data;
 
 typedef struct s_minimap
 {
 	char	**map;
-}
+} t_minimap;
 
 //parse_args.c
 int	check_file(const char *args, bool cub);

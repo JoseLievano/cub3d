@@ -6,13 +6,23 @@
 /*   By: jlievano <jlievano@student.42luxembourg.l  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 02:00:10 by jlievano          #+#    #+#             */
-/*   Updated: 2025/02/26 02:02:24 by jlievano         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:12:14 by vflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_GAME_H
 # define FT_GAME_H
 # include "../../includes/cub3d.h"
+
+typedef struct s_player
+{
+        double  pos_x;
+        double  pos_y;
+        double  dir_x;
+        double  dir_y;
+        double  plane_x;
+        double  plane_y;
+}       t_player;
 
 typedef struct s_camera		t_camera;
 typedef struct s_ray		t_ray;
@@ -30,7 +40,7 @@ typedef struct s_mlx
 	int		win_h;
 }	t_mlx;
 
-typedef struct s_player
+/*typedef struct s_player
 {
 	double	pos_x;
 	double	pos_y;
@@ -38,7 +48,7 @@ typedef struct s_player
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
-}	t_player;
+}	t_player;*/
 
 typedef struct s_game
 {

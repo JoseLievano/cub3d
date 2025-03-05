@@ -6,7 +6,7 @@
 /*   By: vflores- <vflores-@student.42luxembou      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 17:45:03 by vflores-          #+#    #+#             */
-/*   Updated: 2025/02/06 18:56:08 by vflores-         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:01:19 by vflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	validate_map(t_data *game_data, char **map_lines)
 	int	j;
 
 	i = 0;
-	game_data->player.dir = '\0';
+	//game_data->player.dir = '\0';
 	while (map_lines[i] != NULL)
 	{
 		j = 0;
@@ -34,12 +34,12 @@ static int	validate_map(t_data *game_data, char **map_lines)
 				j++;
 			if (!ft_strchr("10NSEW", map_lines[i][j]))
 				return (error_msg(game_data->mapinfo.path, ERR_INV_CHAR, FAILURE));
-			if (ft_strchr("NSEW", map_lines[i][j]))
+			/*if (ft_strchr("NSEW", map_lines[i][j]))
 			{
 				if (game_data->player.dir != '\0')
 					return (error_msg(game_data->mapainfo.path, ERR_NUM_PLAYER, FAILURE));
-				game_data->playr.dir = map_lines[i][j];
-			}
+				game_data->player.dir = map_lines[i][j];
+			}*/
 			j++;
 		}
 		i++;
@@ -50,7 +50,7 @@ static int	validate_map(t_data *game_data, char **map_lines)
 /* Verifica si la posicion inicial del jugador es valida en el mapa.
  * El objetivo es asegurar que el jugador no este adyacente a un espacio
  * vario y que las posiciones vecinas sean seguras.
- */
+ *
 static int	check_pos(t_data *game_data, char **map_grid)
 {
 	int	i;
@@ -69,13 +69,13 @@ static int	check_pos(t_data *game_data, char **map_grid)
 	return (SUCCESS);
 }
 
-/* La funcion verifica que:
+ * La funcion verifica que:
  * 1. El jugador tenga una direccion inicial configurada
  * 2. Encuentra la posicion inicial del jugador en el mapa
  * 3. Guarda esa posicion en la estructura player
  * 4. Sustituye la direccion en el mapa con un '0' para marcar la celda como transitable
  * 5. Llama a una funcion auxiliar para verificar si la posicion inicial es valida.
- */
+ *
 static int	check_player_pos(t_data *game, char **map_grid)
 {
 	int	i;
@@ -102,7 +102,7 @@ static int	check_player_pos(t_data *game, char **map_grid)
 	if (check_pos(game, map_grid) == FAILURE)
 		return (error_msg(game->mapinfo.path, ERR_PLAYER_POS, FAILURE));
 	return (SUCCESS);
-}
+}*/
 
 /* La funcion verifica que despues del final del mapa en el archivo .cub:
  * 1. No haya contenido no permitido

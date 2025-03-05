@@ -6,7 +6,7 @@
 /*   By: vflores- <vflores-@student.42luxembou      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:42:06 by vflores-          #+#    #+#             */
-/*   Updated: 2025/03/05 16:04:56 by vflores-         ###   ########.fr       */
+/*   Updated: 2025/03/05 16:27:48 by vflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,11 @@ typedef struct s_map
 	int	fd;
 
 	//Tecturas y colores
-	t_textures	textures;  // Texture paths and colors
+	t_textures	*textures;  // Texture paths and colors
+
+	int	spawn_x;
+	int	spawn_y;
+	char	spawn_dir;
 } t_map;
 
 typedef struct s_data

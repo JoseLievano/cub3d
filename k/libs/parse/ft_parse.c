@@ -16,22 +16,22 @@ void ft_parse(void)
  */
 void free_map(t_map *map)
 {
-    if (!map)
-        return;
-    /*if (map->grid)
+    if (map == NULL)
+        return ;
+    if (map->grid)
     {
         for (int i = 0; i < map->rows; i++)
             free(map->grid[i]);
         free(map->grid);
-    }*/
-    if (map->textures)
-    {
-        free(map->textures.no_path);
-        free(map->textures.so_path);
-        free(map->textures.we_path);
-        free(map->textures.ea_path);
-        free(map->textures);
     }
+    if (map->textures->no_path)    
+    	free(map->textures->no_path);
+    if (map->textures->so_path)
+        free(map->textures->so_path);
+    if (map->textures->we_path)
+        free(map->textures->we_path);
+    if (map->textures->ea_path)
+        free(map->textures->ea_path);
     free(map);
 }
 

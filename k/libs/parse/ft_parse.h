@@ -6,7 +6,7 @@
 /*   By: vflores- <vflores-@student.42luxembou      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:42:06 by vflores-          #+#    #+#             */
-/*   Updated: 2025/03/03 17:03:46 by vflores-         ###   ########.fr       */
+/*   Updated: 2025/03/05 16:04:56 by vflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,6 @@ enum e_output
 	BREAK = 3,
 	CONTINUE = 4
 };
-
-/*typedef struct	s_parse
-{
-	t_player player;
-}	t_parse;
-*/
 
 typedef struct	s_image
 {
@@ -163,7 +157,11 @@ void	parse_data(char *path, t_data *data);
 //free_data.c
 void	free_tab(void **array);
 int	free_data(t_data *data);
-
+//ft_parse.c
+void	ft_parse(void);
+void	ft_parse_test(int argc, char **argv);
+t_map	*get_test_map(void);
+void	free_map(t_map *map);
 
 void	ft_parse_test(int argc, char **argv);
 #endif

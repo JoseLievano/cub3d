@@ -6,7 +6,7 @@
 /*   By: vflores- <vflores-@student.42luxembou      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 11:28:30 by vflores-          #+#    #+#             */
-/*   Updated: 2025/02/14 15:57:48 by vflores-         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:19:03 by vflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	count_lines_map(t_data *game_data, char **file, int i)
 {
 	int	start;
 	int	j;
-	
+
 	start = i;
 	while (file[i])
 	{
@@ -56,9 +56,9 @@ static int	fill_map_tab(t_map *map_info, char **map_tab, int start)
 		map_tab[i] = malloc(sizeof(char) * (map_info->width + 1));
 		if (!map_tab[i])
 			return (error_msg(NULL, ERR_MALLOC, FAILURE));
-		while (map_info->file[start][j] && map_info[start][j] != '\n')
+		while (map_info->file[start][j] && map_info->file[start][j] != '\n')
 		{
-			map_tab[i][j] = map_info[start][j];
+			map_tab[i][j] = map_info->file[start][j];
 			j++;
 		}
 		while (j < map_info->width)
@@ -78,7 +78,7 @@ static int	fill_map_tab(t_map *map_info, char **map_tab, int start)
  */
 static int	parse_map_info(t_data *game_data, char **file, int i)
 {
-	game_data->mapinfo.height = count_lines_map(data, file, i);
+	game_data->mapinfo.height = count_lines_map(game_data, file, i);
 	game_data->map = malloc(sizeof(char *) * (game_data->mapinfo.height + 1));
 	if (!game_data->map)
 		return (error_msg(NULL, ERR_MALLOC, FAILURE));
@@ -93,7 +93,7 @@ static int	parse_map_info(t_data *game_data, char **file, int i)
  * que el mapa tenga una estructura mas robusta para evitar errores en la 
  * validacion o renderizacion.
  */
-static void replace_spaces_with_walls(t_data *game_data)
+static void	replace_spaces_with_walls(t_data *game_data)
 {
 	int	i;
 	int	j;
@@ -103,8 +103,8 @@ static void replace_spaces_with_walls(t_data *game_data)
 	{
 		j = 0;
 		while (game_data->map[i][j] == ' ' || game_data->map[i][j] == '\t'
-			|| game_data[i][j] == '\r' || game_data->map[i][j] == '\v'
-			|| game_data[i][j] == '\f')
+			|| game_data->map[i][j] == '\r' || game_data->map[i][j] == '\v'
+			|| game_data->map[i][j] == '\f')
 			j++;
 		while (game_data->map[i][j++])
 		{
@@ -115,6 +115,7 @@ static void replace_spaces_with_walls(t_data *game_data)
 		i++;
 	}
 }
+
 /* Esta funcion se encarga de inicializar la info del mapa y realizar las 
  * transformaciones necesarias para asegurar que cumpla con los requisitos
  * de dise;o:

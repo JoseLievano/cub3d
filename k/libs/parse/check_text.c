@@ -6,7 +6,7 @@
 /*   By: vflores- <vflores-@student.42luxembou      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 15:44:07 by vflores-          #+#    #+#             */
-/*   Updated: 2025/02/26 15:51:54 by vflores-         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:17:33 by vflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,16 @@
 
 static int	validate_rgb(int *color_values)
 {
-	int i;
+	int	red;
+	int	green;
+	int	blue;
 
-	i = 0;
-	while (i < 3)
-	{
-		if (color_values[i] || color_values[i] > 255)
-			return (error_msg_val(color_values[i], ERR_TEX_RGB_VAL, FAILURE));
-		i++;
-	}
+	red = (*color_values >> 16) & 0xFF;
+	green = (*color_values >> 8) & 0xFF;
+	blue = *color_values & 0xFF;
+	if (red < 0 || red > 255 || green < 0
+		|| green > 255 || blue < 0 || blue > 255)
+		return (error_msg_val(*color_values, ERR_TEXT_RGB_VAL, FAILURE));
 	return (SUCCESS);
 }
 
@@ -41,9 +42,9 @@ static int	validate_rgb(int *color_values)
 static unsigned long	rgb_to_hex(int *colors)
 {
 	unsigned long	hex_value;
-	int	res;
-	int	green;
-	int	blue;
+	int				red;
+	int				green;
+	int				blue;
 
 	red = colors[0];
 	green = colors[1];
@@ -66,14 +67,14 @@ int	validate_tex(t_data *data, t_textures *tex)
 		return (error_msg(data->mapinfo.path, ERR_TEX_MISSING, FAILURE));
 	if (!tex->floor_rgb || !tex->ceil_rgb)
 		return (error_msg(data->mapinfo.path, ERR_COLOR_MISSING, FAILURE));
-	if (check_file(text->no_path, false) == FAILURE
+	if (check_file(tex->no_path, false) == FAILURE
 		|| check_file(tex->so_path, false) == FAILURE
 		|| check_file(tex->we_path, false) == FAILURE
 		|| check_file(tex->ea_path, false) == FAILURE
 		|| validate_rgb(tex->floor_rgb) == FAILURE
 		|| validate_rgb(tex->ceil_rgb) == FAILURE)
 		return (FAILURE);
-	tex->hex_floor = validate_rgb(tex->floor_rgb);
-	tex->hex_ceiling = validate_rgb(tex->ceil_rgb);
+	tex->hex_floor = rgb_to_hex(tex->floor_rgb);
+	tex->hex_ceiling = rgb_to_hex(tex->ceil_rgb);
 	return (SUCCESS);
 }

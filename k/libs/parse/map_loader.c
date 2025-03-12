@@ -6,7 +6,7 @@
 /*   By: vflores- <vflores-@student.42luxembou      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 11:46:40 by vflores-          #+#    #+#             */
-/*   Updated: 2025/02/17 17:15:09 by vflores-         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:30:08 by vflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
  */
 static char	*extract_text_path(char *line, int i)
 {
-	int	len;
-	int	j;
+	int		len;
+	int		j;
 	char	*path;
 
 	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
@@ -53,7 +53,7 @@ static char	*extract_text_path(char *line, int i)
  * 1. Verificacion de caracteres no validos
  * 2. Comparacion de los identificadores de direccion
  */
-static int assign_text_path(t_textures *text, char *line, int i)
+static int	assign_text_path(t_textures *text, char *line, int i)
 {
 	if (line[i + 1] && ft_isprint(line[i + 2]))
 		return (ERR);
@@ -76,30 +76,31 @@ static int assign_text_path(t_textures *text, char *line, int i)
  * Colores(F y C)
  * Datos del mapa(1 o 0)
  */
-static int	skip_spaces_and_parse(t_data *game_data, char **map, int i, int j)
+static int	skip_spaces_and_parse(t_data *dt, char **map, int i, int j)
 {
 	while (map[i][j] == ' ' || map[i][j] == '\t' || map[i][j] == '\n')
 		j++;
 	if (ft_isprint(map[i][j]) && !ft_isdigit(map[i][j]))
 	{
-		if (map[i][j + 1] && ft_isprint(map[i][j + 1]) && !ft_isdigit(map[i][j]))
+		if (map[i][j + 1] && ft_isprint(map[i][j + 1])
+				&& !ft_isdigit(map[i][j]))
 		{
-			if (assign_text_path(&game_data->texinfo, map[i], j) == ERR)
-				return (error_msg(game_data->mapinfo.path, ERR_TEXT_INVALID, FAILURE));
+			if (assign_text_path(&dt->texinfo, map[i], j) == ERR)
+				return (error_msg(dt->mapinfo.path, ERR_TEXT_INVALID, FAILURE));
 			return (BREAK);
 		}
 		else
 		{
-			if (fill_color_text(game_data, &game_data->texinfo, map[i], j) == ERR)
+			if (parse_color_text(dt, &dt->texinfo, map[i], j) == ERR)
 				return (FAILURE);
 			return (BREAK);
 		}
 	}
 	else if (ft_isdigit(map[i][j]))
 	{
-		if (built_map(game_data, map, i) == FAILURE)
-			return (error_msg(game_data->mapinfo.path, ERR_INVALID_MAP, FAILURE))
-		return (SUCCESS)
+		if (built_map(dt, map, i) == FAILURE)
+			return (error_msg(dt->mapinfo.path, ERR_INVALID_MAP, FAILURE));
+		return (SUCCESS);
 	}
 	return (CONTINUE);
 }
@@ -110,7 +111,7 @@ static int	skip_spaces_and_parse(t_data *game_data, char **map, int i, int j)
  * 2. Dentro de cada linea, recorre cada caracter con el indice j
  * 3. Llama a skip_spaces_and_parse para procesar la info del mapa y determinar
  * como manejar cada linea.
- * Si el retorno es BREAK, interrumpe el bucle interno y pasa a la siguiente linea
+ * Si el retorno es BREAK, interrumpe el bucle interno y pasa a la sig linea
  * Si devuelve FAILURE, la funcion termina con error
  * Si devuelve SUCCESS, la funcion finaliza correctamente
  * 4. Si no hay errores, la funcion retorna SUCCESS al final

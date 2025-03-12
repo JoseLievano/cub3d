@@ -6,7 +6,7 @@
 /*   By: vflores- <vflores-@student.42luxembou      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 15:59:52 by vflores-          #+#    #+#             */
-/*   Updated: 2025/02/17 11:10:22 by vflores-         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:50:01 by vflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static bool	only_no_digits(char *str)
 static int	*convert_rgb_array(char **rgb_to_convert, int *rgb)
 {
 	int	i;
-	
+
 	i = 0;
 	while (rgb_to_convert[i])
 	{
@@ -49,7 +49,7 @@ static int	*convert_rgb_array(char **rgb_to_convert, int *rgb)
 		}
 		i++;
 	}
-	free_tab((void **)rbg);
+	free_tab((void **)rgb);
 	return (rgb);
 }
 
@@ -60,8 +60,8 @@ static int	*convert_rgb_array(char **rgb_to_convert, int *rgb)
 static int	*parse_rgb_values(char *line)
 {
 	char	**rgb_to_convert;
-	int	*rgb;
-	int	i;
+	int		*rgb;
+	int		i;
 
 	rgb_to_convert = ft_split(line, ',');
 	i = 0;
@@ -85,23 +85,23 @@ static int	*parse_rgb_values(char *line)
  * colores del techo o del piso en la estructura t_textures. Se encarga
  * de convertir los valores RGB desde la linea y validar que sean correctos
  */
-int	parse_color_text(t_data *game_data, t_textures *text, char *line, int i)
+int	parse_color_text(t_data *dt, t_textures *text, char *line, int i)
 {
 	if (line[i + 1] && ft_isprint(line[i + 1]))
-		return (error_msg(game_data->mapinfo.path, ERR_FLOOR_CEILING, ERR));
+		return (error_msg(dt->mapinfo.path, ERR_FLOOR_CEILING, ERR));
 	if (!text->ceil_rgb && line[i] == 'C')
 	{
 		text->ceil_rgb = parse_rgb_values(line + i + 1);
 		if (text->ceil_rgb == 0)
-			return (error_msg(game_data->mapinfo.path, ERR_COLOR_CEILING, ERR));
+			return (error_msg(dt->mapinfo.path, ERR_COLOR_CEILING, ERR));
 	}
 	else if (!text->floor_rgb && line[i] == 'F')
 	{
 		text->floor_rgb = parse_rgb_values(line + i + 1);
 		if (text->floor_rgb == 0)
-			return (error_msg(game_data->mapinfo.path, ERR_COLOR_FLOOR, ERR));
+			return (error_msg(dt->mapinfo.path, ERR_COLOR_FLOOR, ERR));
 	}
 	else
-		return (error_msg(game_data->mapinfo.path, ERR_FLOOR_CEILING, ERR));
+		return (error_msg(dt->mapinfo.path, ERR_FLOOR_CEILING, ERR));
 	return (SUCCESS);
 }

@@ -6,13 +6,16 @@
 /*   By: vflores- <vflores-@student.42luxembou      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:42:06 by vflores-          #+#    #+#             */
-/*   Updated: 2025/03/05 16:27:48 by vflores-         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:54:11 by vflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PARSE_H
 # define FT_PARSE_H
-#include "/home/vflores-/CommonCore/cub3D/cub3d/k/libs/game/ft_game.h"
+# include <errno.h>
+# include <stdbool.h>
+# include <stddef.h>
+//#include "/home/vanesa/42/cub3Dmio/cub3dcasi/k/libs/game/ft_game.h"
 # include "../../includes/cub3d.h"
 
 /*   MACROS   */
@@ -37,9 +40,12 @@
 # define ERR_MAP_TOO_SMALL "Map is not at least 3 lines high"
 # define ERR_MAP_LAST "Map is not the last element in file"
 # define ERR_TEXT_RGB_VAL "Invalid RGB value (min: 0, max: 255)"
+# define ERR_TEX_MISSING "Missing text"
+# define ERR_COLOR_MISSING "Missing colors"
 # define ERR_MALLOC "Could not allocate memory"
 # define ERR_FLOOR_CEILING "Invalid ceiling RGB color(s)"
 # define ERR_COLOR_FLOOR "Invalid floor RGB color"
+# define ERR_COLOR_CEILING "Invalid ceiling RGB color"
 # define ERR_TEXT_INVALID "Invalid texture"
 # define ERR_INVALID_MAP "Map description is either wrong or incomplete"
 # define ERR_MLX_IMG "Could not create mlx image"
@@ -55,112 +61,96 @@ enum e_output
 	CONTINUE = 4
 };
 
-typedef struct	s_image
+typedef struct s_image
 {
 	void	*img;
-	int	*addr;
-	int	pixel_bits;
-	int	size_line;
-	int	endian;
+	int		*addr;
+	int		pixel_bits;
+	int		size_line;
+	int		endian;
 }	t_image;
-
-/*typedef struct s_player
-{
-        double  pos_x;
-        double  pos_y;
-        double  dir_x;
-        double  dir_y;
-        double  plane_x;
-        double  plane_y;
-}       t_player;*/
 
 // For storing parsed textures and colors
 typedef struct s_textures
 {
-	char	*no_path;   // North texture path
-	char	*so_path;   // South texture path
-	char	*we_path;   // West texture path
-	char	*ea_path;   // East texture path
-	int		floor_rgb;  // Packed RGB (0xRRGGBB)
-	int		ceil_rgb;   // Packed RGB (0xRRGGBB)
+	char			*no_path;
+	char			*so_path;
+	char			*we_path;
+	char			*ea_path;
+	int				floor_rgb;
+	int				ceil_rgb;
 	unsigned long	hex_floor;
 	unsigned long	hex_ceiling;
-	int	size;
-	double	step;
-	double	pos;
-	int	x;
-	int	y;
-} t_textures;
+	int				size;
+	double			step;
+	double			pos;
+	int				x;
+	int				y;
+}	t_textures;
 
 // For storing map data and player spawn
 typedef struct s_map
 {
-
-	//Datos generales del archivo
-	char	*path; //Ruta del archivo .cub
-	char	**file; //Contenido del archivo .cub linea por linea
-	int	line_count; //Numero total de lineas en el archivo	
-	
-	//Informacion del mapa
-	char		**grid;      // 2D map grid (from .cub)
-	int			rows;        // Map row count
-	int			cols;        // Map column count
-	int		index_end_of_map; //indica el final del mapa
-	
-	int	height;
-	int	width;
-	//Validacion del archivo
-	int	is_valid; //Flag que indica si el archivo esta
-			  //correctamente configurado
-	int	fd;
-
-	//Tecturas y colores
-	t_textures	*textures;  // Texture paths and colors
-
-	int	spawn_x;
-	int	spawn_y;
-	char	spawn_dir;
-} t_map;
+	char		*path;
+	char		**file;
+	int			line_count;
+	char		**grid;
+	int			rows;
+	int			cols;
+	int			index_end_of_map;
+	int			height;
+	int			width;
+	int			is_valid;
+	int			fd;
+	t_textures	*textures;
+	int			spawn_x;
+	int			spawn_y;
+	char		spawn_dir;
+}	t_map;
 
 typedef struct s_data
 {
-	void	*mlx;
-	void	*win;
-	int	win_height;
-	int	win_width;
-	//t_player	player;
-	t_map	mapinfo;
-	char	**map;
-	int	**textures;
-	int	**textures_pixels;
+	void		*mlx;
+	void		*win;
+	int			win_height;
+	int			win_width;
+	t_map		mapinfo;
+	char		**map;
+	int			**textures;
+	int			**textures_pixels;
 	t_textures	texinfo;
 }	t_data;
 
 typedef struct s_minimap
 {
 	char	**map;
-} t_minimap;
+}	t_minimap;
 
+//errors.c
+int		error_msg(const char *context, char *msg, int exit_code);
+int		error_msg_val(int context, char *msg, int exit_code);
 //parse_args.c
-int	check_file(const char *args, bool cub);
+int		check_file(const char *args, bool cub);
 //ft_parse_utils.c
 size_t	get_max_line_len(t_map *map, int i);
-int	is_whitespace(char c);
+int		is_whitespace(char c);
 //map_parser.c
-int	validate_map(t_data *game_data, char **map_content);
+int		validate_map(t_data *game_data, char **map_content);
 //map_borders.c
-int	check_sides(t_map *map, char **map_lines);
+int		check_sides(t_map *map, char **map_lines);
 //create_map.c
-int	built_map(t_data *game_data, char **file, int i);
+int		built_map(t_data *game_data, char **file, int i);
 //fill_color_text.c
-int	parse_color_text(t_data *game_data, t_textures *text, char *line, int i);
+int		parse_color_text(t_data *dt, t_textures *text, char *line, int i);
 //map_loader.c
-int	parse_map_file(t_data *game_data, char **map);
+int		parse_map_file(t_data *game_data, char **map);
 //ft_parse_data.c
-void	parse_data(char *path, t_data *data);
+void	parse_data(char *path, t_data *dt);
 //free_data.c
 void	free_tab(void **array);
-int	free_data(t_data *data);
+int		free_data(t_data *data);
+//check_text.c
+int		validate_tex(t_data *data, t_textures *tex);
 //ft_parse.c
 void	ft_parse(void);
 void	ft_parse_test(int argc, char **argv);

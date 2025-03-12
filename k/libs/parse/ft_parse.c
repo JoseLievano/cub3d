@@ -99,6 +99,13 @@ t_map *get_test_map(void)
 
     // Set RGB values
     map->textures->ceil_rgb = 0x2446bf;
+    if (map->textures->ceil_rgb == 0)
+	    return NULL;
+    map->textures->ceil_rgb = 0x2446bf;
+
+    map->textures->floor_rgb = 0x2446bf;
+    if (map->textures->floor_rgb == 0)
+	    return NULL;
     map->textures->floor_rgb = 0x66290e;
 
     return map;

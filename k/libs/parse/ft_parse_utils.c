@@ -24,7 +24,7 @@ int	is_whitespace(char c)
 {
 	if (c == ' ' || c == '\t' || c == '\r' || c == '\n'
 		|| c == '\v' || c == '\f')
-		return (SUCCES);
+		return (SUCCESS);
 	else
 		return (FAILURE);
 }

@@ -34,7 +34,7 @@ int	check_sides(t_map *map, char **map_lines)
 	int	i;
 	int	j;
 
-	if (top_botton_check(map_lines, 0, 0) == FAILURE)
+	if (top_bottom_check(map_lines, 0, 0) == FAILURE)
 		return (FAILURE);
 	i = 1;
 	while (i < (map->height - 1))
@@ -44,7 +44,7 @@ int	check_sides(t_map *map, char **map_lines)
 			return (FAILURE);
 		i++;
 	}
-	if (top_botton_check(map_lines, i, 0) == FAILURE)
+	if (top_bottom_check(map_lines, i, 0) == FAILURE)
 		return (FAILURE);
 	return (SUCCESS);
 }

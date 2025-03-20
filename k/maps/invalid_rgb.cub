@@ -1,0 +1,21 @@
+no_path textures/wall_1.xpm
+so_path textures/wall_2.xpm
+we_path textures/wood.xpm
+ea_path textures/wood.xpm
+
+F 20,20,-20
+C 200,200,200
+
+11111
+10001
+10S01
+10001
+10001
+10001
+11001
+10001
+10001
+10001
+10001
+10001
+11111

@@ -6,7 +6,7 @@
 /*   By: jlievano <jlievano@student.42luxembourg.l  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 01:58:17 by jlievano          #+#    #+#             */
-/*   Updated: 2025/03/05 15:11:03 by vflores-         ###   ########.fr       */
+/*   Updated: 2025/03/20 09:48:51 by vflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ static int	close_x(t_game *game)
 
 void	ft_game(void)
 {
-	t_map	*map;
+	t_map	map;
 	t_game	*game;
 
-	map = get_test_map();
-	game = ft_game_init(map);
+	init_map(&map);
+	game = ft_game_init(&map);
 	mlx_do_key_autorepeatoff(game->mlx->mlx_ptr);
 	mlx_hook(game->mlx->win_ptr,
 		2, 1L << 0, ft_press_key, game);

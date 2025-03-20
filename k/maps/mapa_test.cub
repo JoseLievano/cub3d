@@ -1,0 +1,16 @@
+
+NO textures/wall_1.xmp
+SO textures/wall_2.xmp
+WE textures/wood.xmp
+EA textures/wood.xmp
+
+F 220, 100, 50
+C 255, 0, 0
+
+11111111
+10000001
+10111001
+10100001
+10101111
+10000111
+11111111

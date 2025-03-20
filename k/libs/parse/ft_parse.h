@@ -6,7 +6,7 @@
 /*   By: vflores- <vflores-@student.42luxembou      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:42:06 by vflores-          #+#    #+#             */
-/*   Updated: 2025/03/11 15:54:11 by vflores-         ###   ########.fr       */
+/*   Updated: 2025/03/20 16:30:31 by vflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,6 @@ enum e_output
 	BREAK = 3,
 	CONTINUE = 4
 };
-
-typedef struct s_image
-{
-	void	*img;
-	int		*addr;
-	int		pixel_bits;
-	int		size_line;
-	int		endian;
-}	t_image;
 
 // For storing parsed textures and colors
 typedef struct s_textures
@@ -151,11 +142,9 @@ void	free_tab(void **array);
 int		free_data(t_data *data);
 //check_text.c
 int		validate_tex(t_data *data, t_textures *tex);
-//ft_parse.c
-void	ft_parse(void);
-void	ft_parse_test(int argc, char **argv);
-t_map	*get_test_map(void);
-void	free_map(t_map *map);
+//init_textures.c
+void    init_textures(t_textures *text);
+//init_map.c
+void    init_map(t_map *map);
 
-void	ft_parse_test(int argc, char **argv);
 #endif

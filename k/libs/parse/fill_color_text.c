@@ -6,7 +6,7 @@
 /*   By: vflores- <vflores-@student.42luxembou      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 15:59:52 by vflores-          #+#    #+#             */
-/*   Updated: 2025/03/11 15:50:01 by vflores-         ###   ########.fr       */
+/*   Updated: 2025/03/20 10:00:23 by vflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,19 +87,25 @@ static int	*parse_rgb_values(char *line)
  */
 int	parse_color_text(t_data *dt, t_textures *text, char *line, int i)
 {
+	int	*rgb;
+
 	if (line[i + 1] && ft_isprint(line[i + 1]))
 		return (error_msg(dt->mapinfo.path, ERR_FLOOR_CEILING, ERR));
-	if (!text->ceil_rgb && line[i] == 'C')
+	if (line[i] == 'C' && text->ceil_rgb == -1)
 	{
-		text->ceil_rgb = parse_rgb_values(line + i + 1);
-		if (text->ceil_rgb == 0)
+		rgb = parse_rgb_values(line + i + 1);
+		if (!rgb)
 			return (error_msg(dt->mapinfo.path, ERR_COLOR_CEILING, ERR));
+		text->ceil_rgb = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
+		free(rgb);
 	}
-	else if (!text->floor_rgb && line[i] == 'F')
+	else if (line[i] == 'F' && text->floor_rgb == -1)
 	{
-		text->floor_rgb = parse_rgb_values(line + i + 1);
-		if (text->floor_rgb == 0)
+		rgb = parse_rgb_values(line + i + 1);
+		if (!rgb)
 			return (error_msg(dt->mapinfo.path, ERR_COLOR_FLOOR, ERR));
+		text->floor_rgb = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
+		free(rgb);
 	}
 	else
 		return (error_msg(dt->mapinfo.path, ERR_FLOOR_CEILING, ERR));

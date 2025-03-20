@@ -6,7 +6,7 @@
 /*   By: vflores- <vflores-@student.42luxembou      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:42:29 by vflores-          #+#    #+#             */
-/*   Updated: 2025/03/11 15:41:52 by vflores-         ###   ########.fr       */
+/*   Updated: 2025/03/20 14:00:36 by vflores-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,26 @@ int	check_file(const char *args, bool cub)
 	int	fd;
 
 	if (is_dir(args))
+	{
+		printf("ERROR: %s es un directorio, no un archivo\n", args);
 		return (error_msg(args, ERR_FILE_IS_DIR, FAILURE));
+	}
 	fd = open(args, O_RDONLY);
 	if (fd == -1)
+	{
+		printf("ERROR: no se puede abrir el archivo %s, %s\n", args, strerror(errno));
 		return (error_msg(args, strerror(errno), FAILURE));
+	}
 	close(fd);
 	if (cub && !is_cub_ext(args))
+	{
+		printf("ERROR: El archivo no tiene extension .cub\n");
 		return (error_msg(args, ERR_FILE_NOT_CUB, FAILURE));
+	}
 	if (!cub && !is_xmp_ext(args))
+	{
+		printf("ERROR: El archivo no tiene extension .xpm\n");
 		return (error_msg(args, ERR_FILE_NOT_XPM, FAILURE));
+	}
 	return (SUCCESS);
 }

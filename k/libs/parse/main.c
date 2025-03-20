@@ -7,7 +7,8 @@ int main(int argc, char **argv)
 		printf("Uso: %s mapa_test.cub\n", argv[0]);
 		return 1;
 	}
-	ft_parse_test(argc, argv);
+	t_data game_data;
+	parse_data(argv[1], &game_data);
 
 	printf("Mapa cargado correctamente.\n");
 	return 0;

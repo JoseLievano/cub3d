@@ -6,11 +6,10 @@
 /*   By: jlievano <jlievano@student.42luxembourg.l  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 02:00:10 by jlievano          #+#    #+#             */
-/*   Updated: 2025/03/05 16:13:38 by vflores-         ###   ########.fr       */
+/*   Updated: 2025/02/26 02:02:24 by jlievano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
 #ifndef FT_GAME_H
 # define FT_GAME_H
 # include "../../includes/cub3d.h"

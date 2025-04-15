@@ -3,7 +3,7 @@ CC			=	gcc
 RM			=	rm -f
 CFLAGS		=	-Wall -Wextra -Werror
 OBJS		=	$(SRC:.c=.o)
-SRC			=	ft_parse.c
+SRC			=	ft_parse.c ft_validator.c
 
 $(NAME)		:	$(OBJS)
 				ar rcs $(NAME) $(OBJS)

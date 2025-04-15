@@ -26,9 +26,12 @@ typedef struct s_map {
 t_map	*init_map();
 
 //Test parser
-void	ft_parse(void);
 void	ft_parse_test(int argc, char **argv);
 t_map	*get_test_map(void);
 void	free_map(t_map *map);
+
+//Parser functions
+t_map	*ft_parse(int argc, char **argv);
+bool	ft_validator(int argc, char **argv);
 
 #endif

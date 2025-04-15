@@ -5,10 +5,14 @@ void ft_parse_test(int argc, char **argv)
 	printf("Test function args count %d, map path %s", argc, argv[2]);
 }
 
-void ft_parse(void)
+t_map *ft_parse(int argc, char **argv)
 {
-	printf("Parse initialized\n");
-	printf("game in parse\n");
+	t_map	*map;
+
+	if (!ft_validator(argc, argv))
+		return (NULL);
+
+	return (map);
 }
 
 /*

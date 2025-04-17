@@ -1,32 +1,81 @@
 #include "ft_parse.h"
 
-static bool	check_file(char *file)
+static int	line_len(char *line)
 {
 	int	len;
-	int	fd;
+	int	i;
 
-	if (file == NULL)
-		return (false);
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-		return false;
+	len = 0;
+	i = 0;
+	while (line[i] != '\n' && line[i])
+	{
+		len++;
+		i++;
+	}
+	return (len);
+}
+
+static void	debug_file_content(t_dll *file_content)
+{
+	int		i;
+	char	*current_line;
+	int		len;
+
+	i = 0;
+	len = (int)t_dll_size(file_content);
+	printf("lines : %d\n", len);
+	while (i < len)
+	{
+		current_line = (char *)t_dll_get_node_index(file_content, i)->content;
+		printf("%s\n", current_line);
+		i++;
+	}
+}
+
+static char	*clean_line(char *line)
+{
+	char	*new_line;
+	int		i;
+
+	new_line = (char *)malloc(sizeof(char) * (line_len(line) + 1));
+	i = 0;
+	while (line[i] && line[i] != '\n')
+	{
+		new_line[i] = line[i];
+		i++;
+	}
+	free(line);
+	new_line[i] = '\0';
+	return (new_line);
+}
+
+static t_dll	*get_file_content(int fd)
+{
+	t_dll	*file_content;
+	char	*line;
+
+	file_content = NULL;
+	line = NULL;
+	while (1)
+	{
+		line = get_next_line(fd, 0);
+		if (!line)
+			break ;
+		line = clean_line(line);
+		t_dll_add_back(&file_content, t_dll_new(line));
+	}
 	close(fd);
-	len = ft_strlen(file);
-	if (len < 5)
-		return (false);
-	if (file[len - 4] != '.' || file[len - 3] != 'c' ||
-		file[len - 2] != 'u' || file[len - 1] != 'b')
-		return (false);
-	return (true);
+	return (file_content);
 }
 
 bool ft_validator(int argc, char **argv)
 {
-	bool res;
+	int		fd;
+	t_dll	*file_content;
 
-	res = false;
-	if (argc < 2)
-		return (false);
-	res = check_file(argv[1]);
-	return (res);
+	fd = ft_params_validator(argc, argv);
+	file_content = get_file_content(fd);
+	printf("Content loaded in t_dll\n");
+	debug_file_content(file_content);
+	return true;
 }

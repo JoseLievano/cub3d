@@ -9,6 +9,7 @@ t_map *ft_parse(int argc, char **argv)
 {
 	t_map	*map;
 
+	map = NULL;
 	if (!ft_validator(argc, argv))
 		return (NULL);
 

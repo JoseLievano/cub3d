@@ -4,7 +4,7 @@ RM			=	rm -f
 CFLAGS		=	-Wall -Wextra -Werror
 OBJS		=	$(SRC:.c=.o)
 SRC			=	ft_parse.c ft_validator.c ft_get_next_line.c ft_get_next_line_tools.c \
-				ft_holder_cleaner.c
+				ft_holder_cleaner.c ft_params_validator.c
 
 $(NAME)		:	$(OBJS)
 				ar rcs $(NAME) $(OBJS)

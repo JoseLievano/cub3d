@@ -50,6 +50,7 @@ char	*concat_str(char *str1, char *str2);
 //Parser functions
 t_map	*ft_parse(int argc, char **argv);
 bool	ft_validator(int argc, char **argv);
+int		ft_params_validator(int argc, char **argv);
 
 
 #endif

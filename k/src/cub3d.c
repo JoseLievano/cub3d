@@ -12,8 +12,9 @@
 
 #include "../includes/cub3d.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	ft_game();
+	ft_parse(argc, argv);
+	//ft_game();
 	return (0);
 }

@@ -43,6 +43,5 @@ t_dll *ft_get_file_content(int argc, char **argv)
 
 	fd = ft_params_validator(argc, argv);
 	file_content = get_file_content(fd);
-	ft_debug_file_content(file_content);
 	return (file_content);
 }

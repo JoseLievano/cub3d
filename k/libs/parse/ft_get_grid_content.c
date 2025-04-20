@@ -82,13 +82,13 @@ static t_dll	*ft_clone_node(t_dll *node)
 
 t_dll *ft_get_grid_content(t_dll *file_content)
 {
-	int s_i;
-	int l_i;
+	int	s_i;
+	int	l_i;
 
-	s_i= get_first_index(file_content);
-	l_i= get_last_index(file_content);
+	s_i = get_first_index(file_content);
+	l_i = get_last_index(file_content);
 	printf("s_i: %d\nl_i: %d\n", s_i, l_i);
-	if (s_i== -1 || l_i== -1)
+	if (s_i == -1 || l_i == -1)
 		return NULL;
 	return (t_dll_clone_range(file_content, s_i, l_i, &ft_clone_node));
 }

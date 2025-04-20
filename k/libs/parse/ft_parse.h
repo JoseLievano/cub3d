@@ -62,6 +62,8 @@ char		*ft_remove_key(char *key, char *content);
 int			ft_get_unique_key(char *key, t_dll *file_content);
 char		*ft_get_key_content(char *key, t_dll *f_c);
 t_dll		*ft_get_grid_content(t_dll *file_content);
-void	ft_debug_file_content(t_dll *file_content);
+void		ft_debug_file_content(t_dll *file_content);
+char		**ft_get_grid(t_dll *file_content);
+bool		ft_valid_grid(t_dll *grid);
 
 #endif

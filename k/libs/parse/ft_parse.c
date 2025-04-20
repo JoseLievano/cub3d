@@ -72,16 +72,13 @@ t_map *ft_parse(int argc, char **argv)
 {
 	t_map	*map;
 	t_dll	*file_content;
-	t_dll	*grid_content;
 
 	file_content = NULL;
 	file_content = ft_get_file_content(argc, argv);
 	map = ft_init_map();
 	map->textures = ft_get_textures(file_content);
+	map->grid = ft_get_grid(file_content);
 	ft_debug_map(map);
-	grid_content = ft_get_grid_content(file_content);
-	ft_debug_file_content(grid_content);
-	t_dll_clear(grid_content, &ft_clean_file_content);
 	t_dll_clear(file_content, &ft_clean_file_content);
 	ft_local_clean_map(map);
 	return (map);

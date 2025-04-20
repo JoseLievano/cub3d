@@ -30,27 +30,36 @@ typedef struct s_map {
 t_map	*init_map();
 
 //Test parser
-void	ft_parse_test(int argc, char **argv);
-t_map	*get_test_map(void);
-void	free_map(t_map *map);
+void		ft_parse_test(int argc, char **argv);
+t_map		*get_test_map(void);
+void		free_map(t_map *map);
 
 //Get next line
-int		holder_cleaner(char *holder, int clean);
-char	*get_next_line(int fd, int clean);
-char	*ft_read(int fd, int *char_read, char *temp);
-char	*concat_line(char *line, char *str);
-char	*get_next(char *holder, char *temp);
-char	*cleaner(char *str, int before);
-char	*nl_ft_strdup(char *str);
-int		nl_ft_strlen(char *str);
-int		has_line(char *str);
-char	*str_alloc(int n);
-char	*concat_str(char *str1, char *str2);
+int			holder_cleaner(char *holder, int clean);
+char		*get_next_line(int fd, int clean);
+char		*ft_read(int fd, int *char_read, char *temp);
+char		*concat_line(char *line, char *str);
+char		*get_next(char *holder, char *temp);
+char		*cleaner(char *str, int before);
+char		*nl_ft_strdup(char *str);
+int			nl_ft_strlen(char *str);
+int			has_line(char *str);
+char		*str_alloc(int n);
+char		*concat_str(char *str1, char *str2);
 
 //Parser functions
-t_map	*ft_parse(int argc, char **argv);
-bool	ft_validator(int argc, char **argv);
-int		ft_params_validator(int argc, char **argv);
-
+t_map		*ft_parse(int argc, char **argv);
+t_dll		*ft_get_file_content(int argc, char **argv);
+int			ft_params_validator(int argc, char **argv);
+void		ft_clean_file_content(t_dll *file_content);
+int			ft_line_len(char *line);
+t_map		*ft_process_map(t_dll *file_content);
+t_textures	*ft_get_textures(t_dll *file_content);
+void		ft_error_prc_map(t_map *map, t_dll *file_content, char *msg);
+void		free_map(t_map *map);
+void		ft_set_colors(t_textures *textures, t_dll *file_content);
+char		*ft_remove_key(char *key, char *content);
+int			ft_get_unique_key(char *key, t_dll *file_content);
+char		*ft_get_key_content(char *key, t_dll *f_c);
 
 #endif

@@ -1,20 +1,5 @@
 #include "ft_parse.h"
 
-static int	line_len(char *line)
-{
-	int	len;
-	int	i;
-
-	len = 0;
-	i = 0;
-	while (line[i] != '\n' && line[i])
-	{
-		len++;
-		i++;
-	}
-	return (len);
-}
-
 static void	debug_file_content(t_dll *file_content)
 {
 	int		i;
@@ -37,7 +22,7 @@ static char	*clean_line(char *line)
 	char	*new_line;
 	int		i;
 
-	new_line = (char *)malloc(sizeof(char) * (line_len(line) + 1));
+	new_line = (char *)malloc(sizeof(char) * (ft_line_len(line) + 1));
 	i = 0;
 	while (line[i] && line[i] != '\n')
 	{
@@ -68,14 +53,13 @@ static t_dll	*get_file_content(int fd)
 	return (file_content);
 }
 
-bool ft_validator(int argc, char **argv)
+t_dll *ft_get_file_content(int argc, char **argv)
 {
 	int		fd;
 	t_dll	*file_content;
 
 	fd = ft_params_validator(argc, argv);
 	file_content = get_file_content(fd);
-	printf("Content loaded in t_dll\n");
 	debug_file_content(file_content);
-	return true;
+	return (file_content);
 }

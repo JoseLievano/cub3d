@@ -28,7 +28,7 @@ static int	check_file(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 	{
-		printf("Error\nFile doesn't exist");
+		printf("Error\nCan't open this file :(");
 		exit(EXIT_FAILURE);
 	}
 	len = ft_strlen(file);

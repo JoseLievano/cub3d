@@ -1,22 +1,5 @@
 #include "ft_parse.h"
 
-static void	debug_file_content(t_dll *file_content)
-{
-	int		i;
-	char	*current_line;
-	int		len;
-
-	i = 0;
-	len = (int)t_dll_size(file_content);
-	printf("lines : %d\n", len);
-	while (i < len)
-	{
-		current_line = (char *)t_dll_get_node_index(file_content, i)->content;
-		printf("%s\n", current_line);
-		i++;
-	}
-}
-
 static char	*clean_line(char *line)
 {
 	char	*new_line;
@@ -60,6 +43,6 @@ t_dll *ft_get_file_content(int argc, char **argv)
 
 	fd = ft_params_validator(argc, argv);
 	file_content = get_file_content(fd);
-	debug_file_content(file_content);
+	ft_debug_file_content(file_content);
 	return (file_content);
 }

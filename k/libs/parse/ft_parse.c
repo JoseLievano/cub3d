@@ -24,7 +24,7 @@ void ft_local_clean_map(t_map *map)
 	if (map->grid)
 	{
 		i = 0;
-		while (i < map->rows)
+		while (map->grid[i])
 		{
 			if (map->grid[i])
 				free(map->grid[i]);
@@ -51,6 +51,12 @@ void ft_debug_map(t_map *map)
 	printf("EA: %s\n", map->textures->ea_path);
 	printf("CEIL: %d\n", map->textures->ceil_rgb);
 	printf("FLOOR: %d\n", map->textures->floor_rgb);
+	printf("Map -----\n");
+	printf("Rows : %d\n", map->rows);
+	printf("Columns : %d\n", map->cols);
+	printf("Spawn X: %d\n", map->spawn_x);
+	printf("Spawn Y: %d\n", map->spawn_y);
+	printf("Spawn dir: %c\n", map->spawn_dir);
 }
 
 t_map	*ft_init_map()
@@ -77,9 +83,13 @@ t_map *ft_parse(int argc, char **argv)
 	file_content = ft_get_file_content(argc, argv);
 	map = ft_init_map();
 	map->textures = ft_get_textures(file_content);
-	map->grid = ft_get_grid(file_content);
-	ft_debug_map(map);
+	ft_set_grid(file_content, map);
+	if (map->grid)
+		printf("Grid is valid\n");
+	else
+		printf("Grid is not valid\n");
 	t_dll_clear(file_content, &ft_clean_file_content);
+	ft_debug_map(map);
 	ft_local_clean_map(map);
 	return (map);
 }

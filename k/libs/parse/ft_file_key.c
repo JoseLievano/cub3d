@@ -1,6 +1,6 @@
 #include "ft_parse.h"
 
-static bool ft_is_space(char c)
+bool ft_is_space(char c)
 {
 	if (c == 32 || (c >= 7 && c <= 15))
 		return (true);

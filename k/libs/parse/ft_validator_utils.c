@@ -22,7 +22,7 @@ int	ft_line_len(char *line)
 
 void	ft_error_prc_map(t_map *map, t_dll *file_content, char *msg)
 {
-	free_map(map);
+	ft_local_clean_map(map);
 	t_dll_clear(file_content, &ft_clean_file_content);
 	printf("Error : \n%s", msg);
 	exit(EXIT_FAILURE);

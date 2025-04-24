@@ -27,13 +27,6 @@ typedef struct s_map {
 	t_textures	*textures;  // Texture paths and colors
 } t_map;
 
-t_map	*init_map();
-
-//Test parser
-void		ft_parse_test(int argc, char **argv);
-t_map		*get_test_map(void);
-void		free_map(t_map *map);
-
 //Get next line
 int			holder_cleaner(char *holder, int clean);
 char		*get_next_line(int fd, int clean);
@@ -48,6 +41,7 @@ char		*str_alloc(int n);
 char		*concat_str(char *str1, char *str2);
 
 //Parser functions
+t_map	*init_map();
 t_map		*ft_parse(int argc, char **argv);
 t_dll		*ft_get_file_content(int argc, char **argv);
 int			ft_params_validator(int argc, char **argv);
@@ -56,18 +50,19 @@ int			ft_line_len(char *line);
 t_map		*ft_process_map(t_dll *file_content);
 t_textures	*ft_get_textures(t_dll *file_content);
 void		ft_error_prc_map(t_map *map, t_dll *file_content, char *msg);
-void		free_map(t_map *map);
 void		ft_set_colors(t_textures *textures, t_dll *file_content);
 char		*ft_remove_key(char *key, char *content);
 int			ft_get_unique_key(char *key, t_dll *file_content);
 char		*ft_get_key_content(char *key, t_dll *f_c);
 t_dll		*ft_get_grid_content(t_dll *file_content);
 void		ft_debug_file_content(t_dll *file_content);
-bool		ft_valid_grid(t_dll *grid, t_map *map);
+bool		ft_valid_grid(t_dll *grid);
 void		ft_set_grid(t_dll *file_content, t_map *map);
 bool		ft_set_player_data(t_dll *grid_content, t_map *map);
 bool		ft_check_zeros(t_dll *grid);
 char		**ft_convert_to_str_array(t_dll *grid_content);
 bool		ft_is_space(char c);
+void		ft_local_clean_map(t_map *map);
+void		ft_debug_map(t_map *map);
 
 #endif

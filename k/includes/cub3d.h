@@ -31,8 +31,8 @@
 # include "../libs/graphics/ft_graphics.h"
 
 //Game Defaults
-# define MAX_W 1920
-# define MAX_H 1080
+# define MAX_W 1000
+# define MAX_H 880
 # define IMG_S 64
 
 #endif

@@ -47,7 +47,7 @@ static bool	ft_has_invalid_chars(t_dll *grid)
 		i = 0;
 		while (c_str[i])
 		{
-			if (c_str[i] != ' ' || c_str[i] != '1' || c_str[i] != '0')
+			if (c_str[i] != ' ' && c_str[i] != '1' && c_str[i] != '0')
 				return (true);
 			i++;
 		}
@@ -56,9 +56,8 @@ static bool	ft_has_invalid_chars(t_dll *grid)
 	return (false);
 }
 
-bool ft_valid_grid(t_dll *grid, t_map *map)
+bool ft_valid_grid(t_dll *grid)
 {
-	(void)map;
 	if (!grid)
 		return (false);
 	if (!ft_check_zeros(grid))

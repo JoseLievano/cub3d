@@ -51,7 +51,7 @@ typedef struct s_game
 	bool		is_running;
 }	t_game;
 
-void	ft_game(void);
+void	ft_game(int argc, char **argv);
 t_game	*ft_game_init(t_map *map);
 void	ft_game_over(t_game *game);
 int		ft_press_key(int keycode, t_game *game);

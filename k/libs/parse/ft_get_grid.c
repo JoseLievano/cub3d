@@ -18,7 +18,6 @@ char **ft_convert_to_str_array(t_dll *grid_content)
 		i++;
 	}
 	grid[i] = NULL;
-	t_dll_clear(grid_content, &ft_clean_file_content);
 	return (grid);
 }
 
@@ -34,7 +33,7 @@ void ft_set_grid(t_dll *file_content, t_map *map)
 		t_dll_clear(grid_content, &ft_clean_file_content);
 		return;
 	}
-	if (ft_valid_grid(grid_content, map))
+	if (ft_valid_grid(grid_content))
 		map->grid = ft_convert_to_str_array(grid_content);
 	t_dll_clear(grid_content, &ft_clean_file_content);
 }

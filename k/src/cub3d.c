@@ -14,7 +14,6 @@
 
 int	main(int argc, char **argv)
 {
-	ft_parse(argc, argv);
-	//ft_game();
+	ft_game(argc, argv);
 	return (0);
 }

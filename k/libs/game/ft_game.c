@@ -18,12 +18,16 @@ static int	close_x(t_game *game)
 	return (0);
 }
 
-void	ft_game(void)
+void	ft_game(int argc, char **argv)
 {
 	t_map	*map;
 	t_game	*game;
 
-	map = get_test_map();
+	map = NULL;
+	map = ft_parse(argc, argv);
+	if (!map)
+		exit(1);
+	ft_debug_map(map);
 	game = ft_game_init(map);
 	mlx_do_key_autorepeatoff(game->mlx->mlx_ptr);
 	mlx_hook(game->mlx->win_ptr,

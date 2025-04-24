@@ -1,16 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_file_key.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jlievano <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/24 12:43:29 by jlievano          #+#    #+#             */
+/*   Updated: 2025/04/24 12:43:30 by jlievano         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_parse.h"
 
-bool ft_is_space(char c)
+bool	ft_is_space(char c)
 {
 	if (c == 32 || (c >= 7 && c <= 15))
 		return (true);
 	return (false);
 }
 
-static bool ft_compare_key(char *key, char *str)
+static bool	ft_compare_key(char *key, char *str)
 {
-	size_t len;
-	size_t i;
+	size_t	len;
+	size_t	i;
 
 	i = 0;
 	len = ft_strlen(key);
@@ -27,12 +39,12 @@ static bool ft_compare_key(char *key, char *str)
 	return (true);
 }
 
-int ft_get_unique_key(char *key, t_dll *content)
+int	ft_get_unique_key(char *key, t_dll *content)
 {
-	int i;
-	int hits;
-	t_dll *local_c;
-	char *c_str;
+	int		i;
+	int		hits;
+	t_dll	*local_c;
+	char	*c_str;
 
 	i = 0;
 	hits = 0;
@@ -48,16 +60,16 @@ int ft_get_unique_key(char *key, t_dll *content)
 		local_c = local_c->next;
 	}
 	if (hits == 1)
-		return i;
-	return -1;
+		return (i);
+	return (-1);
 }
 
-char *ft_remove_key(char *key, char *content)
+char	*ft_remove_key(char *key, char *content)
 {
-	size_t c_len;
-	size_t k_len;
-	size_t i;
-	char *new_str;
+	size_t	c_len;
+	size_t	k_len;
+	size_t	i;
+	char	*new_str;
 
 	i = 0;
 	c_len = ft_strlen(content);
@@ -81,15 +93,15 @@ char *ft_remove_key(char *key, char *content)
 	return (new_str);
 }
 
-char *ft_get_key_content(char *key, t_dll *f_c)
+char	*ft_get_key_content(char *key, t_dll *f_c)
 {
-	char *fl_path;
-	int i;
+	char	*fl_path;
+	int		i;
 
 	fl_path = NULL;
 	i = ft_get_unique_key(key, f_c);
 	if (i < 0)
-		return fl_path;
-	fl_path = ft_remove_key(key, (char *) t_dll_get_node_index(f_c, i)->content);
+		return (fl_path);
+	fl_path = ft_remove_key(key, (char *)t_dll_get_node_index(f_c, i)->content);
 	return (fl_path);
 }

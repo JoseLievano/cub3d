@@ -6,7 +6,7 @@
 /*   By: jlievano <jlievano@student.42luxembourg.l  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 20:49:28 by jlievano          #+#    #+#             */
-/*   Updated: 2025/04/17 20:49:30 by jlievano         ###   ########.fr       */
+/*   Updated: 2025/04/24 12:44:53 by jlievano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,15 @@ static int	check_file(char *file)
 	len = ft_strlen(file);
 	if (len < 5)
 		throw_incorrect_file_extension();
-	if (file[len - 4] != '.' || file[len - 3] != 'c' ||
-		file[len - 2] != 'u' || file[len - 1] != 'b')
+	if (file[len - 4] != '.' || file[len - 3] != 'c'
+		|| file[len - 2] != 'u' || file[len - 1] != 'b')
 		throw_incorrect_file_extension();
 	return (fd);
 }
 
 int	ft_params_validator(int argc, char **argv)
 {
-	int fd;
+	int	fd;
 
 	if (argc < 2)
 	{

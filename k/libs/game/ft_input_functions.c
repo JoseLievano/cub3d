@@ -16,13 +16,13 @@ int	ft_press_key(int keycode, t_game *game)
 {
 	if (keycode == 120 || keycode == 65307)
 		ft_game_over(game);
-	else if (keycode == 122 || keycode == 65362 || keycode == 107)
+	else if (keycode == 122 || keycode == 65362 || keycode == 107 || keycode == 119)
 		game->input->up = true;
 	else if (keycode == 100 || keycode == 108)
 		game->input->right = true;
 	else if (keycode == 115 || keycode == 65364 || keycode == 106)
 		game->input->down = true;
-	else if (keycode == 113 || keycode == 104)
+	else if (keycode == 113 || keycode == 104 || keycode == 97)
 		game->input->left = true;
 	else if (keycode == 65363)
 		game->input->r_r = true;
@@ -34,13 +34,13 @@ int	ft_press_key(int keycode, t_game *game)
 int	ft_release_key(int keycode, t_game *game)
 {
 	(void) game;
-	if (keycode == 122 || keycode == 65362 || keycode == 107)
+	if (keycode == 122 || keycode == 65362 || keycode == 107 || keycode == 119)
 		game->input->up = false;
 	else if (keycode == 100 || keycode == 108)
 		game->input->right = false;
 	else if (keycode == 115 || keycode == 65364 || keycode == 106)
 		game->input->down = false;
-	else if (keycode == 113 || keycode == 104)
+	else if (keycode == 113 || keycode == 104 || keycode == 97)
 		game->input->left = false;
 	else if (keycode == 65363)
 		game->input->r_r = false;

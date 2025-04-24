@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_get_textures.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jlievano <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/24 12:44:21 by jlievano          #+#    #+#             */
+/*   Updated: 2025/04/24 12:44:22 by jlievano         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_parse.h"
 
-static void ft_set_textures(t_textures *textures, t_dll *file_content)
+static void	ft_set_textures(t_textures *textures, t_dll *file_content)
 {
 	textures->no_path = ft_get_key_content("NO", file_content);
 	textures->so_path = ft_get_key_content("SO", file_content);
@@ -24,14 +36,14 @@ t_textures	*ft_init_textures(void)
 	return (textures);
 }
 
-t_textures *ft_get_textures(t_dll *file_content)
+t_textures	*ft_get_textures(t_dll *file_content)
 {
-	t_textures *textures;
+	t_textures	*textures;
 
 	textures = ft_init_textures();
 	if (!textures)
-		return NULL;
+		return (NULL);
 	ft_set_textures(textures, file_content);
 	ft_set_colors(textures, file_content);
-	return textures;
+	return (textures);
 }

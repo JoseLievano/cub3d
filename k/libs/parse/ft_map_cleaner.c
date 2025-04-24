@@ -6,16 +6,16 @@
 /*   By: jlievano <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 11:30:27 by jlievano          #+#    #+#             */
-/*   Updated: 2025/04/24 11:30:29 by jlievano         ###   ########.fr       */
+/*   Updated: 2025/04/24 12:44:43 by jlievano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_parse.h"
 
-static void clean_textures(t_textures *textures)
+static void	clean_textures(t_textures *textures)
 {
 	if (!textures)
-		return;
+		return ;
 	if (textures->no_path)
 		free(textures->no_path);
 	if (textures->so_path)
@@ -27,12 +27,12 @@ static void clean_textures(t_textures *textures)
 	free(textures);
 }
 
-void ft_local_clean_map(t_map *map)
+void	ft_local_clean_map(t_map *map)
 {
-	int i;
+	int	i;
 
 	if (!map)
-		return;
+		return ;
 	if (map->grid)
 	{
 		i = 0;
@@ -48,5 +48,3 @@ void ft_local_clean_map(t_map *map)
 		clean_textures(map->textures);
 	free(map);
 }
-
-

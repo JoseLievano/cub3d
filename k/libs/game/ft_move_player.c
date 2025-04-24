@@ -46,8 +46,8 @@ void	ft_move_player(t_game *game)
 
 	player = game->player;
 	input = game->input;
-	angle_speed = 0.12;
-	speed = 0.07;
+	angle_speed = 0.04;
+	speed = 0.06;
 	rotate_player(angle_speed, player, input);
 	ft_walk(speed, player, input, game);
 }

@@ -27,7 +27,6 @@ void	ft_game(int argc, char **argv)
 	map = ft_parse(argc, argv);
 	if (!map)
 		exit(1);
-	ft_debug_map(map);
 	game = ft_game_init(map);
 	mlx_do_key_autorepeatoff(game->mlx->mlx_ptr);
 	mlx_hook(game->mlx->win_ptr,

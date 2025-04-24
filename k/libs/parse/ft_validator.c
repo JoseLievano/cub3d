@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_validator.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jlievano <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/24 12:45:42 by jlievano          #+#    #+#             */
+/*   Updated: 2025/04/24 12:45:43 by jlievano         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_parse.h"
 
 static char	*clean_line(char *line)
@@ -36,7 +48,7 @@ static t_dll	*get_file_content(int fd)
 	return (file_content);
 }
 
-t_dll *ft_get_file_content(int argc, char **argv)
+t_dll	*ft_get_file_content(int argc, char **argv)
 {
 	int		fd;
 	t_dll	*file_content;

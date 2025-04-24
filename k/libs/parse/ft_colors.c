@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_colors.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jlievano <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/24 12:43:23 by jlievano          #+#    #+#             */
+/*   Updated: 2025/04/24 12:43:24 by jlievano         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_parse.h"
 
-void free_tab(void **tab)
+void	free_tab(void **tab)
 {
-	size_t i;
+	size_t	i;
 
 	if (!tab)
-		return;
+		return ;
 	i = 0;
 	while (tab[i])
 	{
@@ -15,20 +27,20 @@ void free_tab(void **tab)
 	free(tab);
 }
 
-static int ft_get_valid_color_int(char *color_str)
+static int	ft_get_valid_color_int(char *color_str)
 {
-	int color_i;
+	int	color_i;
 
 	color_i = ft_atoi(color_str);
 	if (color_i < 0 || color_i > 255)
-		return -1;
-	return color_i;
+		return (-1);
+	return (color_i);
 }
 
-static int parse_component(char *str)
+static int	parse_component(char *str)
 {
-	char *trimmed;
-	int value;
+	char	*trimmed;
+	int		value;
 
 	trimmed = ft_strtrim(str, " \t\n\r");
 	if (!trimmed)
@@ -38,12 +50,12 @@ static int parse_component(char *str)
 	return (value);
 }
 
-static int ft_get_rgb(char *color_str)
+static int	ft_get_rgb(char *color_str)
 {
-	char **parts;
-	int red;
-	int green;
-	int blue;
+	char	**parts;
+	int		red;
+	int		green;
+	int		blue;
 
 	if (!color_str)
 		return (-1);
@@ -59,15 +71,14 @@ static int ft_get_rgb(char *color_str)
 	return ((red << 16) | (green << 8) | blue);
 }
 
-void ft_set_colors(t_textures *textures, t_dll *file_content)
+void	ft_set_colors(t_textures *textures, t_dll *file_content)
 {
-	char *floor;
-	char *ceil;
+	char	*floor;
+	char	*ceil;
 
 	(void) textures;
 	floor = ft_get_key_content("F", file_content);
 	ceil = ft_get_key_content("C", file_content);
-	printf("floor [%s]\nceil [%s]\n", floor, ceil);
 	textures->ceil_rgb = ft_get_rgb(ceil);
 	textures->floor_rgb = ft_get_rgb(floor);
 	free(floor);

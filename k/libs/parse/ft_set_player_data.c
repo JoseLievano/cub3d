@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_set_player_data.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jlievano <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/24 12:45:19 by jlievano          #+#    #+#             */
+/*   Updated: 2025/04/24 12:45:20 by jlievano         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_parse.h"
 
-static bool ft_check_row(size_t y, char *row, t_map *map)
+static bool	ft_check_row(size_t y, char *row, t_map *map)
 {
-	size_t x;
+	size_t	x;
 
 	x = 0;
 	while (row[x])
@@ -21,7 +33,7 @@ static bool ft_check_row(size_t y, char *row, t_map *map)
 	return (true);
 }
 
-bool ft_set_player_data(t_dll *grid, t_map *map)
+bool	ft_set_player_data(t_dll *grid, t_map *map)
 {
 	size_t	y;
 	char	*row;

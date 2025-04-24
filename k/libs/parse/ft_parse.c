@@ -1,7 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_parse.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jlievano <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/24 12:45:05 by jlievano          #+#    #+#             */
+/*   Updated: 2025/04/24 12:45:06 by jlievano         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_parse.h"
 
-void ft_debug_map(t_map *map)
+void	ft_debug_map(t_map *map)
 {
+	int	i;
+
+	i = 0;
 	printf("------------------\n\n\nDEBUGGING MAP CONTENT\n");
 	printf("Walls: \n");
 	printf("NO: %s\n", map->textures->no_path);
@@ -16,9 +31,7 @@ void ft_debug_map(t_map *map)
 	printf("Spawn X: %d\n", map->spawn_x);
 	printf("Spawn Y: %d\n", map->spawn_y);
 	printf("Spawn dir: %c\n\n", map->spawn_dir);
-
 	printf("Grid:\n");
-	int i = 0;
 	while (map->grid[i])
 	{
 		printf("[%s]\n", map->grid[i]);
@@ -26,7 +39,7 @@ void ft_debug_map(t_map *map)
 	}
 }
 
-t_map	*ft_init_map()
+t_map	*ft_init_map(void)
 {
 	t_map	*map;
 
@@ -66,30 +79,34 @@ static void	ft_set_col_row(t_map *map)
 	map->rows = i;
 }
 
-static bool ft_final_map_validation(t_map *map)
+static bool	ft_final_map_validation(t_map *map)
 {
-	int fd;
+	int	fd;
 
-	if ((fd = open(map->textures->no_path, O_RDONLY)) == -1)
+	fd = open(map->textures->no_path, O_RDONLY);
+	if (fd == -1)
 		return (false);
 	close(fd);
-	if ((fd = open(map->textures->ea_path, O_RDONLY)) == -1)
+	fd = open(map->textures->ea_path, O_RDONLY);
+	if (fd == -1)
 		return (false);
 	close(fd);
-	if ((fd = open(map->textures->so_path, O_RDONLY)) == -1)
+	fd = open(map->textures->so_path, O_RDONLY);
+	if (fd == -1)
 		return (false);
 	close(fd);
-	if ((fd = open(map->textures->we_path, O_RDONLY)) == -1)
+	fd = open(map->textures->we_path, O_RDONLY);
+	if (fd == -1)
 		return (false);
 	close(fd);
-	if (!map->grid)
+	if (!map->grid || !map->textures)
 		return (false);
-	if (!map->textures)
+	if (map->textures->ceil_rgb == -1 || map->textures->floor_rgb == -1)
 		return (false);
 	return (true);
 }
 
-t_map *ft_parse(int argc, char **argv)
+t_map	*ft_parse(int argc, char **argv)
 {
 	t_map	*map;
 	t_dll	*file_content;
@@ -99,13 +116,15 @@ t_map *ft_parse(int argc, char **argv)
 	map = ft_init_map();
 	map->textures = ft_get_textures(file_content);
 	ft_set_grid(file_content, map);
-    ft_set_col_row(map);
+	ft_set_col_row(map);
 	if (!ft_final_map_validation(map))
 	{
 		ft_local_clean_map(map);
+		t_dll_clear(file_content, &ft_clean_file_content);
 		printf("Invalid .cub map :/\n");
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	t_dll_clear(file_content, &ft_clean_file_content);
+	//ft_debug_map(map);
 	return (map);
 }

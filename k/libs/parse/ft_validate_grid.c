@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_validate_grid.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jlievano <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/24 12:45:28 by jlievano          #+#    #+#             */
+/*   Updated: 2025/04/24 12:45:37 by jlievano         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_parse.h"
 
 static bool	ft_line_is_empty(char *str)
@@ -56,7 +68,7 @@ static bool	ft_has_invalid_chars(t_dll *grid)
 	return (false);
 }
 
-bool ft_valid_grid(t_dll *grid)
+bool	ft_valid_grid(t_dll *grid)
 {
 	if (!grid)
 		return (false);

@@ -1,7 +1,7 @@
 CC			=	gcc
 RM			=	rm -f
 CFLAGS		=	-Wall -Wextra -Werror
-NAME		=	cube3d
+NAME		=	cub3d
 OBJS		=	$(SRC:.c=.o)
 MINILIBX	=	libs/minilibx/libmlx_Linux.a
 LIBFT		=	libs/libft/libft.a
@@ -18,7 +18,7 @@ SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 
 all			:	$(NAME)
 
-$(NAME)		:	download $(OBJS) $(GAME) $(GRAPHICS) $(RAYCAST) $(INPUT) $(PARSE) $(UTILS) $(T_DLL) $(LIBFT) $(MINILIBX)
+$(NAME)		:	$(OBJS) $(GAME) $(GRAPHICS) $(RAYCAST) $(INPUT) $(PARSE) $(UTILS) $(T_DLL) $(LIBFT) $(MINILIBX)
 				@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(GAME) $(GRAPHICS) $(RAYCAST) $(INPUT) $(PARSE) $(UTILS) $(T_DLL) $(LIBFT) $(MINILIBX) -lXext -lX11 -lm
 
 $(MINILIBX)	:
@@ -69,5 +69,16 @@ fclean		:	clean
 				@make -C libs/utils fclean
 
 re			:	fclean all
+
+invalid_maps:
+				@valgrind --leak-check=full ./cub3d maps/invalid_ext.cubb; \
+				echo "\n---------\n\n"; \
+				valgrind --leak-check=full ./cub3d maps/invalid_imgs_path.cub \
+				echo "\n---------\n\n"; \
+				valgrind --leak-check=full ./cub3d maps/invalid_rgb.cub \
+				echo "\n---------\n\n"; \
+				valgrind --leak-check=full ./cub3d maps/invalid_space.cub \
+				echo "\n---------\n\n"; \
+				valgrind --leak-check=full ./cub3d maps/invalid_grid.cub \
 
 .PHONY		:	all clean fclean re download
